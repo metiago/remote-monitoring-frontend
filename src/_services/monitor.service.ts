@@ -15,7 +15,7 @@ export class MonitorService {
         return this.http.get<Node[]>(`${this.API_URL}`);
     }
 
-    addOrEdit(form: any) {
-        return this.http.put<any>(`${this.API_URL}`, form).pipe(map(message => { return message; }));
+    add(form: any) {
+        return this.http.post<any>(`${this.API_URL}`, form).pipe(map(message => { return message; }));
     }
 }

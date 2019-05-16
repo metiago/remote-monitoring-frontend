@@ -17,7 +17,7 @@
 
 <div class="main">
   <div class="container">
-    <a href="#modal1" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">add_box</i>New</a>
+    <a (click)="openModal()" class="waves-effect waves-light btn-small"><i class="material-icons left">add_box</i>New</a>
     <div class="row" *ngIf="nodes && nodes.length == 0">
       <i class="material-icons mt-dt-color">dns</i> There are no node in this view
     </div>
@@ -46,7 +46,7 @@
 </div>
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="mNodeForm" class="modal">
   <div class="modal-content">
     <h6>Remote Node Information</h6>    
     <form class="col s12" [formGroup]="nodeForm" (ngSubmit)="onSubmit()">        
@@ -76,9 +76,9 @@
         </div>      
         <div class="row">
             <div class="input-field col s6">                
-                <input id="pollfreq" name="pollfreq" type="number" class="validate" formControlName="pollfreq">
-                <label for="pollfreq">Poll Frequency (Sec.)</label>
-                <control-messages [control]="nodeForm.controls.pollfreq" class="error"></control-messages>
+                <input id="pollFrequency" name="pollFrequency" type="number" class="validate" formControlName="pollFrequency">
+                <label for="pollFrequency">Poll Frequency (Sec.)</label>
+                <control-messages [control]="nodeForm.controls.pollFrequency" class="error"></control-messages>
             </div>
             <div class="input-field col s6">                
                 <input id="expire" name="expire" type="number" class="validate" formControlName="expire">
@@ -95,7 +95,7 @@
 
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    <a (click)="closeModal()" class="modal-close waves-effect waves-green btn-flat">Close</a>
   </div>
 </div>
 
