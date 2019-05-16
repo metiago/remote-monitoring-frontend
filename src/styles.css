@@ -70,6 +70,10 @@ nav ul a {
     background-color: #393E41;
 }
 
+.validate {
+    color: #FFFFC7 !important;
+}
+
 .input-field input:focus + label {
     color: #FFFFC7 !important;
 }
@@ -77,4 +81,19 @@ nav ul a {
 .row .input-field input:focus {
     border-bottom: 1px solid #FFFFC7 !important;
     box-shadow: 0 1px 0 0 #FFFFC7 !important
+}
+
+.clazz-success {
+    background-color: #5cb85c;
+    font-weight: bold;
+}
+
+.clazz-warning {
+    background-color: #f57f17;
+    font-weight: bold;
+}
+
+.clazz-danger {
+    background-color: #c9302c;
+    font-weight: bold;
 }
