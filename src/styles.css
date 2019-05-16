@@ -64,3 +64,17 @@ nav ul a {
     transition: background-color .2s ease-out;
     cursor: pointer;
 }
+
+.modal .modal-content {
+    padding: 24px;
+    background-color: #393E41;
+}
+
+.input-field input:focus + label {
+    color: #FFFFC7 !important;
+}
+  
+.row .input-field input:focus {
+    border-bottom: 1px solid #FFFFC7 !important;
+    box-shadow: 0 1px 0 0 #FFFFC7 !important
+}
