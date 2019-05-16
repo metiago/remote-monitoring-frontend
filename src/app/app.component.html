@@ -17,9 +17,12 @@
 
 <div class="main">
   <div class="container">
-    <a (click)="openModal()" class="waves-effect waves-light btn-small"><i class="material-icons left">add_box</i>New</a>
+    <a (click)="openModal()" class="waves-effect waves-light btn-small">
+      <i class="material-icons left">add_box</i>New</a>
     <div class="row" *ngIf="nodes && nodes.length == 0">
-      <i class="material-icons mt-dt-color">dns</i> There are no node in this view
+      <p>
+        <i class="material-icons mt-dt-color">dns</i> There are no node in this view
+      </p>
     </div>
     <div class="row" *ngIf="nodes && nodes.length > 0">
       <table>
@@ -48,49 +51,49 @@
 <!-- Modal Structure -->
 <div id="mNodeForm" class="modal">
   <div class="modal-content">
-    <h6>Remote Node Information</h6>    
-    <form class="col s12" [formGroup]="nodeForm" (ngSubmit)="onSubmit()">        
-        <div class="row">
-            <div class="input-field col s6">                
-                <input id="host" name="host" type="text" class="validate" formControlName="host">
-                <label for="host">Host</label>
-                <control-messages [control]="nodeForm.controls.host" class="error"></control-messages>
-            </div>
-            <div class="input-field col s6">
-                <input id="port" name="port" type="number" class="validate" formControlName="port">
-                <label for="port">Port</label>
-                <control-messages [control]="nodeForm.controls.port" class="error"></control-messages>
-            </div>
+    <h6>Remote Node Information</h6>
+    <form class="col s12" [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="host" name="host" type="text" class="validate" formControlName="host">
+          <label for="host">Host</label>
+          <control-messages [control]="nodeForm.controls.host" class="error"></control-messages>
         </div>
-        <div class="row">
-            <div class="input-field col s6">                
-                <input id="start" name="start" type="text" class="validate" formControlName="start">
-                <label for="start">Start Time</label>
-                <control-messages [control]="nodeForm.controls.start" class="error"></control-messages>
-            </div>
-            <div class="input-field col s6">                
-                <input id="expire" name="end" type="text" class="validate" formControlName="end">
-                <label for="end">End Time</label>
-                <control-messages [control]="nodeForm.controls.end" class="error"></control-messages>
-            </div>
-        </div>      
-        <div class="row">
-            <div class="input-field col s6">                
-                <input id="pollFrequency" name="pollFrequency" type="number" class="validate" formControlName="pollFrequency">
-                <label for="pollFrequency">Poll Frequency (Sec.)</label>
-                <control-messages [control]="nodeForm.controls.pollFrequency" class="error"></control-messages>
-            </div>
-            <div class="input-field col s6">                
-                <input id="expire" name="expire" type="number" class="validate" formControlName="expire">
-                <label for="expire">Expire Time (Sec.)</label>
-                <control-messages [control]="nodeForm.controls.expire" class="error"></control-messages>
-            </div>
-        </div>  
-        <div class="row">
-            <p class="right-align">
-                <button [disabled]="!nodeForm.valid" class="waves-effect waves-light btn-small">Send</button>
-            </p>
+        <div class="input-field col s6">
+          <input id="port" name="port" type="number" class="validate" formControlName="port">
+          <label for="port">Port</label>
+          <control-messages [control]="nodeForm.controls.port" class="error"></control-messages>
         </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="start" name="start" type="text" class="validate" formControlName="start">
+          <label for="start">Start Time</label>
+          <control-messages [control]="nodeForm.controls.start" class="error"></control-messages>
+        </div>
+        <div class="input-field col s6">
+          <input id="expire" name="end" type="text" class="validate" formControlName="end">
+          <label for="end">End Time</label>
+          <control-messages [control]="nodeForm.controls.end" class="error"></control-messages>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="pollFrequency" name="pollFrequency" type="number" class="validate" formControlName="pollFrequency">
+          <label for="pollFrequency">Poll Frequency (Sec.)</label>
+          <control-messages [control]="nodeForm.controls.pollFrequency" class="error"></control-messages>
+        </div>
+        <div class="input-field col s6">
+          <input id="expire" name="expire" type="number" class="validate" formControlName="expire">
+          <label for="expire">Expire Time (Sec.)</label>
+          <control-messages [control]="nodeForm.controls.expire" class="error"></control-messages>
+        </div>
+      </div>
+      <div class="row">
+        <p class="right-align">
+          <button [disabled]="!nodeForm.valid" class="waves-effect waves-light btn-small">Send</button>
+        </p>
+      </div>
     </form>
 
   </div>
