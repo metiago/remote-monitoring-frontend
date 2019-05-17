@@ -14,14 +14,15 @@ export class ErrorInterceptor extends MaterialHelper implements HttpInterceptor 
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
-        next.handle(request).pipe(            
-            catchError(err => {
-            this.checkHttpCallBack(err);
-            return throwError(err.error);
-        })).subscribe(res => this.checkHttpCallBack(res));
 
-        return next.handle(request)
+        return next.handle(request).pipe(catchError(err => {
+            if (err.status === 200 || err.status === 201) {
+                this.checkHttpCallBack(err);
+                return
+            }
+            this.checkHttpCallBack(err);
+            return throwError(this.error);
+        }))
     }
 
     checkHttpCallBack(response: any) {
@@ -29,6 +30,9 @@ export class ErrorInterceptor extends MaterialHelper implements HttpInterceptor 
         switch (response.status) {
             case 201:
                 this.showToast(response.body.message, this.clazzSuccess)
+                break;
+            case 404:
+                this.showToast(response.error.message, this.clazzWarning)
                 break;
             case 400:
                 this.showToast(response.error.message, this.clazzWarning)

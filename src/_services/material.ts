@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+declare var $:any;
 declare var M: any;
 const toastTime: number = 6000;
 
@@ -16,6 +17,10 @@ export class MaterialHelper {
         M.toast({ html: message, classes: clazz }, toastTime);
     }
     
+    updateFields() {
+        setTimeout(function () { $('.input-field label').addClass('active'); }, 1);
+    }
+
     openModal(ID: string) {
         let elem = document.querySelector(ID);
         let instances = M.Modal.init(elem, ['']);
