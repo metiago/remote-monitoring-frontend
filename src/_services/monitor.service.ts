@@ -1,8 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Node } from '../_models';
-
 
 @Injectable({ providedIn: 'root' })
 export class MonitorService {
@@ -12,10 +10,18 @@ export class MonitorService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<Node[]>(`${this.API_URL}`);
+        return this.http.get<Node[]>(`${this.API_URL}`)
     }
 
-    add(form: any) {
-        return this.http.post<any>(`${this.API_URL}`, form).pipe(map(message => { return message; }));
+    add(form: any) {        
+        return this.http.post<any>(`${this.API_URL}`, form)
+    }
+
+    detail(key: string) {
+        return this.http.get<any>(`${this.API_URL}/${key}`);
+    }
+
+    delete(key: string) {
+        return this.http.delete<any>(`${this.API_URL}/${key}`);
     }
 }
