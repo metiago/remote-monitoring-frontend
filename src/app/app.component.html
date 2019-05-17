@@ -38,8 +38,12 @@
             <td>{{n.host}}</td>
             <td>{{n.port}}</td>
             <td>
-              <i class="material-icons mt-dt-icon mt-dt-color">details</i>
-              <i class="material-icons mt-dt-color">cancel</i>
+              <a (click)="detail(n.key)">
+                <i class="material-icons mt-dt-icon mt-dt-color">details</i>
+              </a>
+              <a (click)="delete(n.key)">
+                <i class="material-icons mt-dt-color">cancel</i>
+              </a>
             </td>
           </tr>
         </tbody>

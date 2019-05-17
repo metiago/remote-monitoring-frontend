@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 
 import { MonitorService } from "../_services/monitor.service";
 import { MaterialHelper } from "../_services/material";
@@ -15,10 +14,11 @@ import { Node } from 'src/_models';
 export class AppComponent implements OnInit {
 
   title = 'Monitoring';
-  nodes: Node[];
+  mNodeForm = "#mNodeForm"
+  nodes: Node[];  
   nodeForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private materialHelper: MaterialHelper,
     private monitorService: MonitorService) { }
 
@@ -37,19 +37,36 @@ export class AppComponent implements OnInit {
   }
 
   openModal() {
-    this.materialHelper.openModal("#mNodeForm")
+    this.materialHelper.openModal(this.mNodeForm)
   }
 
   closeModal() {
-    this.materialHelper.closeModal("#mNodeForm")
+    this.materialHelper.closeModal(this.mNodeForm)
   }
 
   get f() { return this.nodeForm.controls; }
 
   getAll() {
-    this.monitorService.getAll().pipe(first()).subscribe(data => {
-      return this.nodes = data;
-    });
+    this.monitorService.getAll().subscribe((data) => {
+      this.nodes = data
+    })
+  }
+
+  detail(key: string) {
+    this.monitorService.detail(key).subscribe((node) => {      
+      this.materialHelper.openModal(this.mNodeForm)
+      this.materialHelper.updateFields()
+      this.nodeForm.patchValue(node);
+    })
+  }
+
+  delete(key: string) {
+    const yes = window.confirm("Delete ?");
+    if (yes === true) {
+      this.monitorService.delete(key).subscribe(() => {
+        this.getAll()
+      })
+    }
   }
 
   onSubmit() {
@@ -58,15 +75,10 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.monitorService.add(this.nodeForm.value).subscribe(resp => {
-
-      if (resp === null || resp.status === 200) {
-        this.nodeForm.reset()
-        this.closeModal();
-        this.getAll()
-      }
-
+    this.monitorService.add(this.nodeForm.value).subscribe(res => {
+      this.nodeForm.reset()
+      this.closeModal();
+      this.getAll()
     });
-
   }
 }
