@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
 
   title = 'Monitoring';
   mNodeForm = "#mNodeForm"
+  mNodeDetail = "#mNodeDetail"
+  node: Node
   nodes: Node[]
   nodeForm: FormGroup
 
@@ -57,11 +59,11 @@ export class AppComponent implements OnInit {
     }
   }
 
-  openModal() {
+  openFormModal() {
     this.materialHelper.openModal(this.mNodeForm)
   }
 
-  closeModal() {
+  closeFormModal() {
     this.materialHelper.closeModal(this.mNodeForm)
   }
 
@@ -74,11 +76,14 @@ export class AppComponent implements OnInit {
   }
 
   detail(key: string) {
-    this.monitorService.detail(key).subscribe((node) => {
-      this.materialHelper.openModal(this.mNodeForm)
-      this.materialHelper.updateFields()
-      this.nodeForm.patchValue(node);
+    this.monitorService.detail(key).subscribe((node) => {      
+      this.materialHelper.openModal(this.mNodeDetail)
+      this.node = node;
     })
+  }
+
+  closeDetailModal() {
+    this.materialHelper.closeModal(this.mNodeDetail)
   }
 
   delete(key: string) {
@@ -107,7 +112,7 @@ export class AppComponent implements OnInit {
 
     this.monitorService.add(this.nodeForm.value).subscribe(res => {
       this.nodeForm.reset()
-      this.closeModal();
+      this.closeFormModal();
       this.getAll()
     });
   }

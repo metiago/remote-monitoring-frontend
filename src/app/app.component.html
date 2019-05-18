@@ -17,7 +17,7 @@
 
 <div class="main">
   <div class="container">
-    <a (click)="openModal()" class="waves-effect waves-light btn-small">
+    <a (click)="openFormModal()" class="waves-effect waves-light btn-small">
       <i class="material-icons left">add_box</i>New</a>
     <div class="row" *ngIf="nodes && nodes.length == 0">
       <p>
@@ -103,11 +103,34 @@
         </p>
       </div>
     </form>
-
   </div>
   <div class="modal-footer">
-    <a (click)="closeModal()" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    <a (click)="closeFormModal()" class="modal-close waves-effect waves-green btn-flat">Close</a>
   </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="mNodeDetail" class="modal">
+  <div class="modal-content">
+    <h6>Remote Node Information</h6>
+    <div *ngIf="node">
+      <p>
+        Address: {{node.host}}:{{node.port}}
+      </p>
+      <p>
+        Period: {{node.start}} to {{node.end}}
+      </p>
+      <p>
+        Poll frequency: {{node.pollFrequency}}
+      </p>
+      <p>
+        Expire time: {{node.expire}}
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <a (click)="closeDetailModal()" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
 </div>
 
 <footer class="page-footer">

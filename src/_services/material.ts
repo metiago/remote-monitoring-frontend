@@ -21,7 +21,7 @@ export class MaterialHelper {
         setTimeout(function () { $('.input-field label').addClass('active'); }, 1);
     }
 
-    openModal(ID: string) {
+    openModal(ID: string) {        
         let elem = document.querySelector(ID);
         let instances = M.Modal.init(elem, ['']);
         instances.open();
