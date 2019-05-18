@@ -28,6 +28,7 @@
       <table>
         <thead>
           <tr>
+            <th>STATUS</th>
             <th>HOST</th>
             <th>PORT</th>
             <th></th>
@@ -35,6 +36,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let n of nodes">
+            <td>
+              <div [ngClass]="{'status-clazz-success': n.up === true, 'status-clazz-danger': n.up === false}"> </div>
+            </td>
             <td>{{n.host}}</td>
             <td>{{n.port}}</td>
             <td>

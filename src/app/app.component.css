@@ -5,3 +5,26 @@
 .mt-dt-color {
     color: #D64933;
 }
+
+.status-clazz-danger {
+    color: #c9302c;
+    width: 15px;
+    height: 15px;
+    background-color: #F00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0px 5px 0px, inset #304701 0 0px 0px, #441313 0 0px 25px;
+    -webkit-animation: blinkRed 0.8s 5;
+    -moz-animation: blinkRed 0.8s 5;
+    -ms-animation: blinkRed 0.8s 5;
+    -o-animation: blinkRed 0.8s 5;
+    animation: blinkRed 0.8s 5;
+}
+
+.status-clazz-success {
+    color: #5cb85c;
+    width: 15px;
+    height: 15px;
+    background-color: #ABFF00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 0px 5px 0px, inset #304701 0 0px 0px, #89FF00 0 0px 25px;
+}
