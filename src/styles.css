@@ -1,19 +1,13 @@
 /* https://coolors.co/011627-393e41-d3d0cb-ffffc7-d64933 */
 
 html {
-    height: 100%;
+    margin: 0;
 }
 
 body {
     color: #D3D0CB;
     background-color: #393E41;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-main {
-   flex: 1 0 auto;   
+    overflow: auto !important;
 }
 
 a {

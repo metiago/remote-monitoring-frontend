@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   node: Node
   nodes: Node[]
   nodeForm: FormGroup
+  public time = [/\d/, /\d/, ':', /\d/, /\d/]
 
   constructor(private formBuilder: FormBuilder,
     private materialHelper: MaterialHelper,
