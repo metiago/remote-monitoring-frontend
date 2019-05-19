@@ -26,8 +26,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    this.openSideNav()
-
     this.nodeForm = this.formBuilder.group({
       host: ['', [Validators.required, Validators.minLength(4)]],
       port: ['', [Validators.required]],
@@ -129,21 +127,19 @@ export class AppComponent implements OnInit {
   upload(event) {
 
     if (event.target.files && event.target.files.length > 0) {
-      
+
       let reader = new FileReader();
       let file = event.target.files[0];
       reader.readAsText(file);
       reader.onload = (e) => {
         const nodes: Node[] = JSON.parse(e.srcElement.result)
-        
-        for(let node of nodes) {
-          this.monitorService.add(node).subscribe(() => this.getAll())
+        for (let node of nodes) {
+          this.monitorService.add(node).subscribe(() => this.getAll())          
         }
-        
-      };     
+      };
     }
   }
-
+  
   openSideNav() {
     this.materialHelper.openSideBarMenu()
   }
