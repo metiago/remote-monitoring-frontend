@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
+    this.openSideNav()
+
     this.nodeForm = this.formBuilder.group({
       host: ['', [Validators.required, Validators.minLength(4)]],
       port: ['', [Validators.required]],
@@ -35,9 +37,9 @@ export class AppComponent implements OnInit {
     });
 
     this.getAll()
-        
+
     var ws = new WebSocket("ws://localhost:8001");
-    
+
     ws.onopen = function (event) {
       console.log("socket open");
     };
@@ -48,9 +50,9 @@ export class AppComponent implements OnInit {
       const reader = new FileReader();
 
       reader.addEventListener('loadend', (e) => {
-        
+
         const node: Node = JSON.parse(e.srcElement.result);
-        
+
         that.setStatus(node)
 
       });
@@ -76,7 +78,7 @@ export class AppComponent implements OnInit {
   }
 
   detail(key: string) {
-    this.monitorService.detail(key).subscribe((node) => {      
+    this.monitorService.detail(key).subscribe((node) => {
       this.materialHelper.openModal(this.mNodeDetail)
       this.node = node;
     })
@@ -97,13 +99,13 @@ export class AppComponent implements OnInit {
 
   setStatus(node: Node) {
     for (let i = 0; i < this.nodes.length; i++) {
-      const elem = this.nodes[i]          
-      if (elem.key === node.key) {            
-        this.nodes.splice(i, 1, node);              
-      }          
+      const elem = this.nodes[i]
+      if (elem.key === node.key) {
+        this.nodes.splice(i, 1, node);
+      }
     }
   }
-  
+  // TODO Apply mask in the forms
   onSubmit() {
 
     if (this.nodeForm.invalid) {
@@ -115,5 +117,33 @@ export class AppComponent implements OnInit {
       this.closeFormModal();
       this.getAll()
     });
+  }
+
+  export() {
+    this.monitorService.export().subscribe((nodes) => {
+      console.log(nodes)
+    })
+  }
+
+  upload(event) {
+
+    if (event.target.files && event.target.files.length > 0) {
+      
+      let reader = new FileReader();
+      let file = event.target.files[0];
+      reader.readAsText(file);
+      reader.onload = (e) => {
+        const nodes: Node[] = JSON.parse(e.srcElement.result)
+        
+        for(let node of nodes) {
+          this.monitorService.add(node).subscribe(() => this.getAll())
+        }
+        
+      };     
+    }
+  }
+
+  openSideNav() {
+    this.materialHelper.openSideBarMenu()
   }
 }

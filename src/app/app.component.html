@@ -1,10 +1,24 @@
 <nav>
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo right">
-      ZBX3
-    </a>
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <!-- <li><a href="#">Sass</a></li> -->
+  <div class="nav-wrapper">    
+    <ul class="right">
+      <li><a (click)="openSideNav()"><i class="material-icons">menu</i></a></li>
+    </ul>
+    <ul id="slide-out" class="sidenav">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img src="assets/office.jpg">
+          </div>
+          <a href="#user"><img class="circle" src="assets/dog.jpgd"></a>
+          <a href="#name"><span class="white-text name">Tiago Souza</span></a>
+          <a href="#email"><span class="white-text email">tiagotg.ribeiro@gmail.com</span></a>
+        </div>
+      </li>
+      <li>
+          <input (change)="upload($event)" [hidden]="true" type="file" accept=".txt" #file>
+          <a (click)="file.click()" title="Export"><i class="material-icons">file_upload</i>Import</a>
+      </li>
+      <li><a href="http://localhost:8001/export/" title="Import"><i class="material-icons">import_export</i>Export</a></li>      
     </ul>
   </div>
 </nav>
@@ -129,12 +143,6 @@
     </div>
   </div>
   <div class="modal-footer">
-      <a (click)="closeDetailModal()" class="modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
-</div>
-
-<footer class="page-footer">
-  <div class="container">
-    © 2018 Tiago Souza
+    <a (click)="closeDetailModal()" class="modal-close waves-effect waves-green btn-flat">Close</a>
   </div>
-</footer>
+</div>

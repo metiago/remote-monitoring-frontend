@@ -19,7 +19,8 @@ export class ErrorInterceptor extends MaterialHelper implements HttpInterceptor 
             if (err.status === 200 || err.status === 201) {
                 this.checkHttpCallBack(err);
                 return
-            }
+            }           
+            this.error = err;
             this.checkHttpCallBack(err);
             return throwError(this.error);
         }))
