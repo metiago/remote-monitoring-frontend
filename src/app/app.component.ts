@@ -40,7 +40,12 @@ export class AppComponent implements OnInit {
     var ws = new WebSocket("ws://localhost:8001");
 
     ws.onopen = function (event) {
-      console.log("socket open");
+      that.materialHelper.showToast("Web socket has been opened", that.materialHelper.clazzSuccess)
+    };
+
+    ws.onerror = function(event) {
+      console.log(event)
+      that.materialHelper.showToast("Web socket has been closed", that.materialHelper.clazzDanger)
     };
 
     const that = this
@@ -50,7 +55,9 @@ export class AppComponent implements OnInit {
 
       reader.addEventListener('loadend', (e) => {
 
-        const node: Node = JSON.parse(e.srcElement.result);
+        const result: string = reader.result as string
+        
+        const node: Node = JSON.parse(result);
 
         that.setStatus(node)
 
@@ -132,11 +139,12 @@ export class AppComponent implements OnInit {
       let file = event.target.files[0];
       reader.readAsText(file);
       reader.onload = (e) => {
-        const nodes: Node[] = JSON.parse(e.srcElement.result)
+        const result: string = reader.result as string
+        const nodes: Node[] = JSON.parse(result)
         for (let node of nodes) {
-          this.monitorService.add(node).subscribe(() => this.getAll())          
+           this.monitorService.add(node).subscribe(() => this.getAll())          
         }
-      };
+      };      
     }
   }
   
