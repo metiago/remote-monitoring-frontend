@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
     ws.onerror = function(event) {
       console.log(event)
       that.materialHelper.showToast("Web socket has been closed", that.materialHelper.clazzDanger)
+      ws.close()
     };
 
     const that = this
@@ -111,7 +112,7 @@ export class AppComponent implements OnInit {
       }
     }
   }
-  // TODO Apply mask in the forms
+  
   onSubmit() {
 
     if (this.nodeForm.invalid) {
