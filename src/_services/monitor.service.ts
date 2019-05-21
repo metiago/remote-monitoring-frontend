@@ -6,7 +6,10 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class MonitorService {
 
-    API_URL = "http://localhost:8001";
+    // API_URL = "http://localhost:8001";
+    // WEBSOCKET_URL = "ws://localhost:8001";
+    API_URL = "https://zbx3.herokuapp.com/"
+    WEBSOCKET_URL = "ws://zbx3.herokuapp.com/"
 
     constructor(private http: HttpClient) { }
 

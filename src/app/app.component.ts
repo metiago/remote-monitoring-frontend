@@ -36,8 +36,8 @@ export class AppComponent implements OnInit {
     });
 
     this.getAll()
-
-    var ws = new WebSocket("ws://localhost:8001");
+        
+    var ws = new WebSocket(this.monitorService.WEBSOCKET_URL);
 
     ws.onopen = function (event) {
       that.materialHelper.showToast("Web socket has been opened", that.materialHelper.clazzSuccess)
