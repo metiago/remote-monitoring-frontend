@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     this.nodeForm = this.formBuilder.group({
-      host: ['', [Validators.required, Validators.minLength(4)]],
+      host: ['', [Validators.required, Validators.minLength(9)]],
       port: ['', [Validators.required]],
       start: ['', [Validators.required]],
       end: ['', [Validators.required]],
