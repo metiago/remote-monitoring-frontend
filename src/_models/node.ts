@@ -1,5 +1,6 @@
 ﻿export class Node {
     key: string;
+    timeZone: string;
     pollFrequency: number;
     start: string;
     end: string;

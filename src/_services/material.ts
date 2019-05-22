@@ -14,11 +14,18 @@ export class MaterialHelper {
     constructor() { }
 
     showToast(message: any, clazz: any) {
-        M.toast({ html: message, classes: clazz }, toastTime);
+        //M.toast({ html: message, classes: clazz }, toastTime);
     }
 
     updateFields() {
         setTimeout(function () { $('.input-field label').addClass('active'); }, 1);
+    }
+
+    initSelectField() {
+        setTimeout(() => {
+            const elems = document.querySelectorAll('select');
+            M.FormSelect.init(elems, ['']);
+        }, 300)
     }
 
     openModal(ID: string) {
@@ -33,11 +40,11 @@ export class MaterialHelper {
         instances.close();
     }
 
-    getMenuInstance() {       
+    getMenuInstance() {
         const elem = document.querySelector('.sidenav');
         return new M.Sidenav(elem);
     }
-     
+
     openSideBarMenu() {
         this.getMenuInstance().open();
     }

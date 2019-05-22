@@ -8,13 +8,18 @@ export class MonitorService {
 
     // API_URL = "http://localhost:8001";
     // WEBSOCKET_URL = "ws://localhost:8001";
-    API_URL = "https://zbx3.herokuapp.com/"
-    WEBSOCKET_URL = "wss://zbx3.herokuapp.com/"
+
+    API_URL = "https://zbx3.herokuapp.com"
+    WEBSOCKET_URL = "wss://zbx3.herokuapp.com"
 
     constructor(private http: HttpClient) { }
 
     getAll() {
         return this.http.get<Node[]>(`${this.API_URL}`)
+    }
+
+    getTimeZones() {        
+        return this.http.get<string[]>(`${this.API_URL}/timezones/`)
     }
 
     add(form: any) {

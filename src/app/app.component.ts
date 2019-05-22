@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   mNodeDetail = "#mNodeDetail"
   node: Node
   nodes: Node[]
+  timezones: string[]
   nodeForm: FormGroup
   public time = [/\d/, /\d/, ':', /\d/, /\d/]
 
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     this.nodeForm = this.formBuilder.group({
+      timeZone: [''],
       host: ['', [Validators.required, Validators.minLength(9)]],
       port: ['', [Validators.required]],
       start: ['', [Validators.required]],
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit {
       expire: ['', [Validators.required]],
     });
 
+    this.getTimeZones();
     this.getAll()
         
     var ws = new WebSocket(this.monitorService.WEBSOCKET_URL);
@@ -84,6 +87,13 @@ export class AppComponent implements OnInit {
     })
   }
 
+  getTimeZones() {   
+    this.monitorService.getTimeZones().subscribe((data) => {
+      this.timezones = data      
+      this.materialHelper.initSelectField();
+    })
+  }
+
   detail(key: string) {
     this.monitorService.detail(key).subscribe((node) => {
       this.materialHelper.openModal(this.mNodeDetail)
@@ -112,7 +122,7 @@ export class AppComponent implements OnInit {
       }
     }
   }
-  
+
   onSubmit() {
 
     if (this.nodeForm.invalid) {
