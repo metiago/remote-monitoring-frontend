@@ -29,15 +29,14 @@ export class AppComponent implements OnInit {
 
     this.nodeForm = this.formBuilder.group({
       timeZone: [''],
-      host: ['', [Validators.required, Validators.minLength(9)]],
+      host: ['', [Validators.required]],
       port: ['', [Validators.required]],
       start: ['', [Validators.required]],
       end: ['', [Validators.required]],
       pollFrequency: ['', [Validators.required]],
       expire: ['', [Validators.required]],
     });
-
-    this.getTimeZones();
+    
     this.getAll()
         
     var ws = new WebSocket(this.monitorService.WEBSOCKET_URL);
@@ -72,6 +71,7 @@ export class AppComponent implements OnInit {
   }
 
   openFormModal() {
+    this.getTimeZones();
     this.materialHelper.openModal(this.mNodeForm)
   }
 
@@ -130,6 +130,7 @@ export class AppComponent implements OnInit {
     }
 
     this.monitorService.add(this.nodeForm.value).subscribe(res => {
+      this.materialHelper.destroySelectField();
       this.nodeForm.reset()
       this.closeFormModal();
       this.getAll()

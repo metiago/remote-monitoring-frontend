@@ -54,6 +54,10 @@ nav ul a {
     cursor: pointer;
 }
 
+.btn:focus, .btn-large:focus, .btn-small:focus, .btn-floating:focus {
+    background-color: #F64939;
+}
+
 .modal .modal-content {
     padding: 24px;
     background-color: #393E41;
@@ -138,4 +142,34 @@ nav ul a {
     margin: 0 32px 0 0;
     width: 24px;
     color: #FFFFC7;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+    font-size: 16px;
+    color: #393E41;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+}
+
+.select-wrapper input.select-dropdown {
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #9e9e9e;
+    outline: none;
+    height: 3rem;
+    line-height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    color: #FFFFC7;
+    display: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 1;
 }

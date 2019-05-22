@@ -10,11 +10,12 @@ export class MaterialHelper {
     clazzWarning = "clazz-warning toast-identifier-for-message";
     clazzDanger = "clazz-danger toast-identifier-for-message";
     clazzSuccess = "clazz-success toast-identifier-for-message";
+    select: any;
 
     constructor() { }
 
     showToast(message: any, clazz: any) {
-        //M.toast({ html: message, classes: clazz }, toastTime);
+        M.toast({ html: message, classes: clazz }, toastTime);
     }
 
     updateFields() {
@@ -24,7 +25,13 @@ export class MaterialHelper {
     initSelectField() {
         setTimeout(() => {
             const elems = document.querySelectorAll('select');
-            M.FormSelect.init(elems, ['']);
+            this.select = M.FormSelect.init(elems, ['']);            
+        }, 300)
+    }
+
+    destroySelectField() {
+        setTimeout(() => {
+            this.select[0].destroy();
         }, 300)
     }
 
