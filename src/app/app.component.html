@@ -15,7 +15,7 @@
         </div>
       </li>
       <li>
-        <input (change)="upload($event)" [hidden]="true" type="file" accept=".txt" #file>
+        <input [(ngModel)]="fileInput" (change)="upload($event)" [hidden]="true" type="file" accept=".txt" #file>
         <a (click)="file.click()" title="Export"><i class="material-icons">file_upload</i>Import</a>
       </li>
       <li><a href="http://localhost:8001/export/" title="Import"><i class="material-icons">import_export</i>Export</a>

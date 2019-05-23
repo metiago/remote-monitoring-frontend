@@ -13,6 +13,7 @@ import { Node } from 'src/_models';
 export class AppComponent implements OnInit {
 
   title = 'Monitoring';
+  fileInput: string;
   mNodeForm = "#mNodeForm"
   mNodeDetail = "#mNodeDetail"
   node: Node
@@ -144,7 +145,7 @@ export class AppComponent implements OnInit {
   }
 
   upload(event) {
-
+    
     if (event.target.files && event.target.files.length > 0) {
 
       let reader = new FileReader();
@@ -156,6 +157,7 @@ export class AppComponent implements OnInit {
         for (let node of nodes) {
            this.monitorService.add(node).subscribe(() => this.getAll())          
         }
+        this.fileInput = "";
       };      
     }
   }

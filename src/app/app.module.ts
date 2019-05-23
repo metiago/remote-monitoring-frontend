@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule }    from '@angular/forms';
+import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { TextMaskModule } from 'angular2-text-mask';
@@ -19,6 +19,7 @@ import { ErrorInterceptor } from '../_services/error.interceptor';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     TextMaskModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, ],
