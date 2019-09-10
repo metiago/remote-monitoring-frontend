@@ -94,12 +94,12 @@
       <div class="row">
         <div class="input-field col s6">
           <input [textMask]="{mask: time}" id="start" name="start" type="text" class="validate" formControlName="start">
-          <label for="start">Start Time</label>
+          <label for="start">Start Time (24-Hour Format)</label>
           <control-messages [control]="nodeForm.controls.start" class="error"></control-messages>
         </div>
         <div class="input-field col s6">
           <input [textMask]="{mask: time}" id="end" name="end" type="text" class="validate" formControlName="end">
-          <label for="end">End Time</label>
+          <label for="end">End Time (24-Hour Format)</label>
           <control-messages [control]="nodeForm.controls.end" class="error"></control-messages>
         </div>
       </div>
