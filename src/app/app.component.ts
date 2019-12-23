@@ -5,6 +5,8 @@ import { MonitorService } from "../_services/monitor.service";
 import { MaterialHelper } from "../_services/material";
 import { Node } from 'src/_models';
 
+declare var $: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,7 +30,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     this.nodeForm = this.formBuilder.group({
-      timeZone: [''],
+      timeZone: ['', [Validators.required]],
       host: ['', [Validators.required]],
       port: ['', [Validators.required]],
       start: ['', [Validators.required]],
@@ -36,16 +38,16 @@ export class AppComponent implements OnInit {
       pollFrequency: ['', [Validators.required]],
       expire: ['', [Validators.required]],
     });
-    
+
     this.getAll()
-        
+
     var ws = new WebSocket(this.monitorService.WEBSOCKET_URL);
 
     ws.onopen = function (event) {
       that.materialHelper.showToast("Web socket has been opened", that.materialHelper.clazzSuccess)
     };
 
-    ws.onerror = function(event) {
+    ws.onerror = function (event) {
       console.log(event)
       that.materialHelper.showToast("Web socket has been closed", that.materialHelper.clazzDanger)
       ws.close()
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit {
       reader.addEventListener('loadend', (e) => {
 
         const result: string = reader.result as string
-        
+
         const node: Node = JSON.parse(result);
 
         that.setStatus(node)
@@ -87,7 +89,7 @@ export class AppComponent implements OnInit {
     })
   }
 
-  getTimeZones() {   
+  getTimeZones() {
     this.monitorService.getTimeZones().subscribe((data) => {
       this.materialHelper.initAutoCompleteField(data)
     })
@@ -128,8 +130,9 @@ export class AppComponent implements OnInit {
       return;
     }
 
+    this.nodeForm.controls['timeZone'].setValue($("#timeZone").val());
+
     this.monitorService.add(this.nodeForm.value).subscribe(res => {
-      this.materialHelper.destroySelectField();
       this.nodeForm.reset()
       this.closeFormModal();
       this.getAll()
@@ -143,7 +146,7 @@ export class AppComponent implements OnInit {
   }
 
   upload(event) {
-    
+
     if (event.target.files && event.target.files.length > 0) {
 
       let reader = new FileReader();
@@ -153,13 +156,13 @@ export class AppComponent implements OnInit {
         const result: string = reader.result as string
         const nodes: Node[] = JSON.parse(result)
         for (let node of nodes) {
-           this.monitorService.add(node).subscribe(() => this.getAll())          
+          this.monitorService.add(node).subscribe(() => this.getAll())
         }
         this.fileInput = "";
-      };      
+      };
     }
   }
-  
+
   openSideNav() {
     this.materialHelper.openSideBarMenu()
   }
