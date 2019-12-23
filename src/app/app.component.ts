@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   mNodeDetail = "#mNodeDetail"
   node: Node
   nodes: Node[]
-  timezones: string[]
   nodeForm: FormGroup
   public time = [/\d/, /\d/, ':', /\d/, /\d/]
 
@@ -90,9 +89,7 @@ export class AppComponent implements OnInit {
 
   getTimeZones() {   
     this.monitorService.getTimeZones().subscribe((data) => {
-      this.timezones = data      
-      this.materialHelper.initAutoCompleteField(this.timezones)
-      this.materialHelper.initSelectField();
+      this.materialHelper.initAutoCompleteField(data)
     })
   }
 

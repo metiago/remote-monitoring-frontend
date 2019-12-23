@@ -31,14 +31,14 @@ export class MaterialHelper {
 
     initAutoCompleteField(data: string[]) {
 
-        let timezones;
+        let timezones = {};
 
         data.forEach((value) => {
             timezones[value] = null
         });
 
         $('input.autocomplete').autocomplete({
-            timezones,
+            data: timezones,
         });
     }
 
