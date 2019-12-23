@@ -25,8 +25,18 @@ export class MaterialHelper {
     initSelectField() {
         setTimeout(() => {
             const elems = document.querySelectorAll('select');
-            this.select = M.FormSelect.init(elems, ['']);            
+            this.select = M.FormSelect.init(elems, ['']);
         }, 300)
+    }
+
+    initAutoCompleteField() {
+        $('input.autocomplete').autocomplete({
+            data: {
+                "Apple": null,
+                "Microsoft": null,
+                "Google": 'https://placehold.it/250x250'
+            },
+        });
     }
 
     destroySelectField() {
