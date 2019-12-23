@@ -29,13 +29,16 @@ export class MaterialHelper {
         }, 300)
     }
 
-    initAutoCompleteField() {
+    initAutoCompleteField(data: string[]) {
+
+        let timezones;
+
+        data.forEach((value) => {
+            timezones[value] = null
+        });
+
         $('input.autocomplete').autocomplete({
-            data: {
-                "Apple": null,
-                "Microsoft": null,
-                "Google": 'https://placehold.it/250x250'
-            },
+            timezones,
         });
     }
 

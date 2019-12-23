@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
   getTimeZones() {   
     this.monitorService.getTimeZones().subscribe((data) => {
       this.timezones = data      
-      this.materialHelper.initAutoCompleteField()
+      this.materialHelper.initAutoCompleteField(this.timezones)
       this.materialHelper.initSelectField();
     })
   }
