@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Node } from '../_models';
-import { map } from 'rxjs/operators';
+
 
 @Injectable({ providedIn: 'root' })
 export class MonitorService {
@@ -40,5 +40,10 @@ export class MonitorService {
 
     upload(nodes: Node[]) {
         return this.http.post<any>(`${this.API_URL}/upload/`, nodes)
+    }
+
+    handleError(error: HttpErrorResponse){
+        console.log("lalalalalalalala");
+        return throwError(error);
     }
 }

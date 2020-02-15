@@ -153,13 +153,21 @@ export class AppComponent implements OnInit {
       let file = event.target.files[0];
       reader.readAsText(file);
       reader.onload = (e) => {
-        const result: string = reader.result as string
-        const nodes: Node[] = JSON.parse(result)
-        for (let node of nodes) {
-          this.monitorService.add(node).subscribe(() => this.getAll())
+        try {
+          const result: string = reader.result as string
+          const nodes: Node[] = JSON.parse(result)
+          for (let node of nodes) {
+            this.monitorService.add(node).subscribe(() => this.getAll())
+
+          }
+          this.fileInput = "";
+        } catch (e) {
+          if (e instanceof SyntaxError) {
+              this.materialHelper.showToast("Invalid JSON file.", this.materialHelper.clazzWarning);
+          }
         }
-        this.fileInput = "";
       };
+
     }
   }
 
