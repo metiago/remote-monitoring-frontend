@@ -27,7 +27,7 @@ export class ErrorInterceptor extends MaterialHelper implements HttpInterceptor 
     }
 
     checkHttpCallBack(response: any) {
-        //console.log(response);
+        
         switch (response.status) {
             case 201:
                 this.showToast(response.body.message, this.clazzSuccess)

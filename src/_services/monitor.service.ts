@@ -41,9 +41,4 @@ export class MonitorService {
     upload(nodes: Node[]) {
         return this.http.post<any>(`${this.API_URL}/upload/`, nodes)
     }
-
-    handleError(error: HttpErrorResponse){
-        console.log("lalalalalalalala");
-        return throwError(error);
-    }
 }
