@@ -91,11 +91,11 @@ export class AppComponent implements OnInit {
 
   getTimeZones() {
     let search = this.nodeForm.controls['timeZone'].value;
-    if(search.length > 3) {
+    if (search.length > 2) {
       this.monitorService.getTimeZones(search).subscribe((data) => {
-          this.materialHelper.updateAutoCompleteField(data);
+        this.materialHelper.updateAutoCompleteField(data);
       });
-    }    
+    }
   }
 
   detail(key: string) {
@@ -137,6 +137,10 @@ export class AppComponent implements OnInit {
 
     this.monitorService.add(this.nodeForm.value).subscribe(res => {
       this.nodeForm.reset()
+      $('#formNode *').filter(':input').each(function (e, v) {
+        $(`#${v.id}`).removeClass("validate valid ng-untouched ng-pristine ng-invalid");
+        $(`#${v.id}`).next().removeClass("active");
+      });
       this.closeFormModal();
       this.getAll()
     });
@@ -166,7 +170,7 @@ export class AppComponent implements OnInit {
           this.fileInput = "";
         } catch (e) {
           if (e instanceof SyntaxError) {
-              this.materialHelper.showToast("Invalid JSON file.", this.materialHelper.clazzWarning);
+            this.materialHelper.showToast("Invalid JSON file.", this.materialHelper.clazzWarning);
           }
         }
       };
