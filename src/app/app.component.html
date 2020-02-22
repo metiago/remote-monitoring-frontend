@@ -74,7 +74,7 @@
           <div class="col s12">
             <div class="row">
               <div class="input-field col s12">
-                <input type="text" id="timeZone" name="timeZone" class="autocomplete" formControlName="timeZone" (keyup)="getTimeZones($event)">
+                <input type="text" id="timeZone" name="timeZone" class="autocomplete" formControlName="timeZone" (keyup)="getTimeZones()">
                 <label>Available Time Zones</label>
                 <control-messages [control]="nodeForm.controls.timeZone" class="error"></control-messages>
               </div>
