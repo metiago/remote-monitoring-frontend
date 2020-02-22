@@ -11,6 +11,7 @@ export class MaterialHelper {
     clazzDanger = "clazz-danger toast-identifier-for-message";
     clazzSuccess = "clazz-success toast-identifier-for-message";
     select: any;
+    autocomplete: any;
 
     constructor() { }
 
@@ -29,17 +30,25 @@ export class MaterialHelper {
         }, 300)
     }
 
-    initAutoCompleteField(data: string[]) {
+    initAutoCompleteField() {
+        $('input.autocomplete').autocomplete({
+            data: {},
+        });
+    }
 
+    updateAutoCompleteField(data: string[]) {
         let timezones = {};
-
         data.forEach((value) => {
             timezones[value] = null
         });
-
         $('input.autocomplete').autocomplete({
             data: timezones,
-        });
+        }).on('focus', function() {            
+            return false;
+        });    
+        setTimeout(() => {
+            $('input.autocomplete').click();
+        }, 300);          
     }
 
     destroySelectField() {

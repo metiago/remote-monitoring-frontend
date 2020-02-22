@@ -18,8 +18,8 @@ export class MonitorService {
         return this.http.get<Node[]>(`${this.API_URL}`)
     }
 
-    getTimeZones() {        
-        return this.http.get<string[]>(`${this.API_URL}/timezones/`)
+    getTimeZones(search: string) {        
+        return this.http.get<string[]>(`${this.API_URL}/timezones/${search}`)
     }
 
     add(form: any) {

@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
   }
 
   openFormModal() {
-    this.getTimeZones();
+    this.materialHelper.initAutoCompleteField();
     this.materialHelper.openModal(this.mNodeForm)
   }
 
@@ -90,9 +90,12 @@ export class AppComponent implements OnInit {
   }
 
   getTimeZones() {
-    this.monitorService.getTimeZones().subscribe((data) => {
-      this.materialHelper.initAutoCompleteField(data)
-    })
+    let search = this.nodeForm.controls['timeZone'].value;
+    if(search.length > 3) {
+      this.monitorService.getTimeZones(search).subscribe((data) => {
+          this.materialHelper.updateAutoCompleteField(data);
+      });
+    }    
   }
 
   detail(key: string) {
